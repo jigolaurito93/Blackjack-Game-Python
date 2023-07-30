@@ -15,8 +15,6 @@ for _ in range(2):
     user_cards.append(deal_card())
     computer_cards.append(deal_card())
 
-print(user_cards)
-
 # Create a function that calculates the sum of the cards in hand and returns the result
 def calculate_score(cards):
     # If the sum is already 21 and there are only 2 cards in hand, it's blackjack. You should return 0
@@ -29,8 +27,30 @@ def calculate_score(cards):
 
     return sum(cards)
 
-user_score = calculate_score(user_cards)
-computer_score = calculate_score(computer_cards)
+while not is_game_over:
+    # Variable to show user's score and computer's score
+    user_score = calculate_score(user_cards)
+    computer_score = calculate_score(computer_cards)
 
-if user_score == 0 or user_score > 21 or computer_score == 0:
-    is_game_over = True
+    print(f"    Your cards: {user_cards}, current score: {user_score}")
+    print(f"    Computer's first card: {computer_cards[0]}")
+
+    if user_score == 0 or user_score > 21 or computer_score == 0:
+        is_game_over = True
+    else:
+        user_should_deal = input(f"Type 'y' to draw another card, type 'n' to pass:").lower()
+        if user_should_deal == 'y':
+            user_cards.append(deal_card())
+        else:
+            is_game_over = True
+
+while computer_score != 0 and computer_score < 17:
+    computer_cards.append(deal_card())
+    computer_score = calculate_score(computer_cards)
+
+    
+
+
+
+
+
